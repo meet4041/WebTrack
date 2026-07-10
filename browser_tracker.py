@@ -14,6 +14,7 @@ class BrowserSnapshot:
     browser: str
     title: str
     url: str
+    open_urls: tuple[str, ...]
     captured_at: datetime
 
 
@@ -44,7 +45,9 @@ class BrowserTracker:
         if self._matches_active(snapshot):
             if self._needs_day_rollover(now):
                 boundary = self._split_active_session(now)
-                self._start_new_session(BrowserSnapshot(snapshot.browser, snapshot.title, snapshot.url, boundary))
+                self._start_new_session(
+                    BrowserSnapshot(snapshot.browser, snapshot.title, snapshot.url, snapshot.open_urls, boundary)
+                )
                 self._refresh_active_duration(now)
                 self._persist(now)
                 return
@@ -66,7 +69,7 @@ class BrowserTracker:
         return (
             self.active_session is not None
             and self.active_session["browser"] == snapshot.browser
-            and self.active_session["url"] == snapshot.url
+            and self.active_session["url"] in snapshot.open_urls
         )
 
     def _start_new_session(self, snapshot: BrowserSnapshot) -> None:
@@ -85,8 +88,8 @@ class BrowserTracker:
     def _update_active_snapshot(self, snapshot: BrowserSnapshot) -> None:
         if self.active_session is None:
             return
-        self.active_session["title"] = snapshot.title
-        self.active_session["url"] = snapshot.url
+        if self.active_session["url"] == snapshot.url:
+            self.active_session["title"] = snapshot.title
         self.active_session["status"] = "ACTIVE"
 
     def _refresh_active_duration(self, now: datetime) -> None:
@@ -169,7 +172,14 @@ if frontApp is "Google Chrome" then
         if not running then return "NONE"
         if (count of windows) = 0 then return "NONE"
         set activeTab to active tab of front window
-        return "Google Chrome" & linefeed & (title of activeTab) & linefeed & (URL of activeTab)
+        set tabUrls to {}
+        repeat with w in windows
+            repeat with t in tabs of w
+                set end of tabUrls to URL of t
+            end repeat
+        end repeat
+        set AppleScript's text item delimiters to linefeed
+        return "Google Chrome" & linefeed & (title of activeTab) & linefeed & (URL of activeTab) & linefeed & (tabUrls as text)
     end tell
 end if
 
@@ -178,7 +188,14 @@ if frontApp is "Safari" then
         if not running then return "NONE"
         if (count of windows) = 0 then return "NONE"
         set activeTab to current tab of front window
-        return "Safari" & linefeed & (name of activeTab) & linefeed & (URL of activeTab)
+        set tabUrls to {}
+        repeat with w in windows
+            repeat with t in tabs of w
+                set end of tabUrls to URL of t
+            end repeat
+        end repeat
+        set AppleScript's text item delimiters to linefeed
+        return "Safari" & linefeed & (name of activeTab) & linefeed & (URL of activeTab) & linefeed & (tabUrls as text)
     end tell
 end if
 
@@ -200,11 +217,18 @@ return "NONE"
             return None
 
         parts = output.splitlines()
-        if len(parts) < 3:
+        if len(parts) < 4:
             return None
 
         browser, title, url = parts[0].strip(), parts[1].strip(), parts[2].strip()
+        open_urls = tuple(part.strip() for part in parts[3:] if part.strip())
         if browser not in SUPPORTED_BROWSERS or not url:
             return None
 
-        return BrowserSnapshot(browser=browser, title=title or url, url=url, captured_at=captured_at)
+        return BrowserSnapshot(
+            browser=browser,
+            title=title or url,
+            url=url,
+            open_urls=open_urls or (url,),
+            captured_at=captured_at,
+        )
