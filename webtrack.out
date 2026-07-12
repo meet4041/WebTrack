@@ -25,3 +25,7 @@ AttributeError: 'BrowserTracker' object has no attribute '_relink_active_session
 2026-07-12 16:27:27,491 INFO Closed session Safari https://github.com/meet4041?page=1&tab=repositories
 2026-07-12 16:27:55,943 INFO Started session Safari https://console.firebase.google.com/u/0/project/playp-ce794/firestore/databases/-default-/data/~2Ftournaments~2Fq4nKUzep88FU6aCBDJyf
 2026-07-12 16:27:57,169 INFO Closed session Safari https://console.firebase.google.com/u/0/project/playp-ce794/firestore/databases/-default-/data/~2Ftournaments~2Fq4nKUzep88FU6aCBDJyf
+2026-07-12 16:29:53,872 INFO Started session Google Chrome https://web.whatsapp.com/
+2026-07-12 16:29:58,063 INFO Closed session Google Chrome https://web.whatsapp.com/
+2026-07-12 16:29:58,063 INFO Started session Safari https://console.firebase.google.com/u/0/project/playp-ce794/firestore/databases/-default-/data/~2Ftournaments~2Fq4nKUzep88FU6aCBDJyf
+2026-07-12 16:30:43,918 INFO Closed session Safari https://console.firebase.google.com/u/0/project/playp-ce794/firestore/databases/-default-/data/~2Ftournaments~2Fq4nKUzep88FU6aCBDJyf
