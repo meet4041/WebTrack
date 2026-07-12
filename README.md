@@ -11,13 +11,26 @@ Local macOS browser activity tracker for Chrome and Safari.
 
 ## Run
 
+1. Clone the repository.
 ```bash
-python3 main.py
+git clone https://github.com/meet4041/WebTrack.git
+cd WebTrack
+```
+
+2. Start WebTrack.
+```bash
+./launched/install.sh
+```
+
+3. Check the saved data.
+- Logs are stored in `~/Desktop/Browser history/History`
+
+4. Stop WebTrack when needed.
+```bash
+./launched/uninstall.sh
 ```
 
 ## Notes
 
 - Requires macOS with AppleScript access.
 - The app is designed to run continuously in the background.
-- State is stored locally in `Desktop/Browser history/.state/state.json`.
-# WebTrack

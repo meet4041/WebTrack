@@ -1,0 +1,27 @@
+Traceback (most recent call last):
+  File "/Users/meetgandhi/Desktop/WebTrack/main.py", line 39, in <module>
+    main()
+  File "/Users/meetgandhi/Desktop/WebTrack/main.py", line 15, in main
+    tracker = BrowserTracker(store, logger)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/meetgandhi/Desktop/WebTrack/browser_tracker.py", line 27, in __init__
+    self._relink_active_sessions()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'BrowserTracker' object has no attribute '_relink_active_sessions'. Did you mean: '_relink_active_session'?
+Traceback (most recent call last):
+  File "/Users/meetgandhi/Desktop/WebTrack/main.py", line 39, in <module>
+    main()
+  File "/Users/meetgandhi/Desktop/WebTrack/main.py", line 15, in main
+    tracker = BrowserTracker(store, logger)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/meetgandhi/Desktop/WebTrack/browser_tracker.py", line 27, in __init__
+    self._relink_active_sessions()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'BrowserTracker' object has no attribute '_relink_active_sessions'. Did you mean: '_relink_active_session'?
+2026-07-12 16:26:55,006 INFO WebTrack started
+2026-07-12 16:27:17,520 INFO Started session Safari https://github.com/meet4041?page=1&tab=repositories
+2026-07-12 16:27:20,093 INFO Closed session Safari https://github.com/meet4041?page=1&tab=repositories
+2026-07-12 16:27:25,015 INFO Started session Safari https://github.com/meet4041?page=1&tab=repositories
+2026-07-12 16:27:27,491 INFO Closed session Safari https://github.com/meet4041?page=1&tab=repositories
+2026-07-12 16:27:55,943 INFO Started session Safari https://console.firebase.google.com/u/0/project/playp-ce794/firestore/databases/-default-/data/~2Ftournaments~2Fq4nKUzep88FU6aCBDJyf
+2026-07-12 16:27:57,169 INFO Closed session Safari https://console.firebase.google.com/u/0/project/playp-ce794/firestore/databases/-default-/data/~2Ftournaments~2Fq4nKUzep88FU6aCBDJyf
